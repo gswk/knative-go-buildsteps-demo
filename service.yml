@@ -14,6 +14,27 @@ spec:
             revision: master
         
         steps:
+        - name: go-build
+          image: gcr.io/cloud-builders/go
+          volumeMounts:
+          - name: droplet
+            mountPath: /out
+          args: ["build", "-o", "/out/knative-go-buildsteps-demo"]
+          env:
+          - name: 'PROJECT_ROOT'
+            value: '/workspace'
+        
+        - name: container-build
+          image: gcr.io/kaniko-project/executor
+          workingDir: /in
+          volumeMounts:
+          - name: droplet
+            mountPath: /in
+          args: ["--dockerfile=./Dockerfile", "--destination=ocker.io/brianmmcclain/knative-go-buildsteps-demo:latest"]
+        
+        volumes:
+        - name: droplet
+          emptyDir: {}
 
       revisionTemplate:
         spec:
