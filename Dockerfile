@@ -1,4 +1,4 @@
-FROM scratch
+FROM alpine
 
 COPY /in/knative-go-buildsteps-demo /knative-go-buildsteps-demo
 
