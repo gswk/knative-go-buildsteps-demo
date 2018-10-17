@@ -1,0 +1,22 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: knative-go-buildsteps-demo
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      build:
+        serviceAccountName: build-bot
+        source:
+          git:
+            url: https://github.com/BrianMMcClain/knative-go-buildsteps-demo
+            revision: master
+        
+        steps:
+
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/brianmmcclain/knative-go-buildsteps-demo:latest
+            imagePullPolicy: Always
