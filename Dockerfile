@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY knative-go-buildsteps-demo /knative-go-buildsteps-demo
+COPY ./gopath/bin/knative-go-buildsteps-demo /knative-go-buildsteps-demo
 
 ENTRYPOINT ["/knative-go-buildsteps-demo"]
