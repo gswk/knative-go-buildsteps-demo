@@ -10,7 +10,7 @@ spec:
         serviceAccountName: build-bot
         source:
           git:
-            url: https://github.com/BrianMMcClain/knative-go-buildsteps-demo
+            url: https://github.com/gswk/knative-go-buildsteps-demo
             revision: master
         
         steps:
@@ -26,11 +26,11 @@ spec:
         
         - name: container-build
           image: gcr.io/kaniko-project/executor
-          workingDir: /in
+          workingDir: /workspace/in
           volumeMounts:
           - name: droplet
-            mountPath: /in
-          args: ["--dockerfile=./Dockerfile", "--destination=ocker.io/brianmmcclain/knative-go-buildsteps-demo:latest"]
+            mountPath: /workspace/in
+          args: ["--dockerfile=./Dockerfile", "--destination=docker.io/gswk/knative-go-buildsteps-demo:latest"]
         
         volumes:
         - name: droplet
@@ -39,5 +39,5 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: docker.io/brianmmcclain/knative-go-buildsteps-demo:latest
+            image: docker.io/gswk/knative-go-buildsteps-demo:latest
             imagePullPolicy: Always
